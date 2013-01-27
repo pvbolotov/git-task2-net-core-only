@@ -1,0 +1,14 @@
+1. git clone ./linux-2.6 ./git-task2-net-core-only
+   cd ./git-task2-net-core-only
+   
+2. git remote rm origin
+
+3. git filter-branch --subdirectory-filter net/core HEAD
+   rm -rf ./.git/refs/original
+
+4. git filter-branch --index-filter 'git ls-files -s | sed "s-\t\"*-&net/core/-" | GIT_INDEX_FILE=$GIT_INDEX_FILE.new git update-index --index-info && mv "$GIT_INDEX_FILE.new" "$GIT_INDEX_FILE"' HEAD
+   rm -rf ./.git/refs/original
+
+5. git remote add github https://github.com/pvbolotov/git-task2-net-core-only
+
+6. git push github master
